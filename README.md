@@ -4,7 +4,7 @@ Generic agent workflow skills and one agent, packaged as a Claude Code plugin ma
 
 Every skill is repo-neutral. Where a skill needs project facts (build commands, dev servers, test accounts, doc style), it reads the repo's `CLAUDE.md` or `AGENTS.md` and the docs they point to.
 
-## Plugins
+## Plugin
 
 ### `kikstart`
 
@@ -23,22 +23,22 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 
 `wrapup` and `spawn` use Claude Code features (`loop`, `code-review`, `security-review`, `simplify`). In other agents they still work as written procedures. `ship` spawns through the Claude desktop app's sessions; without them it stops and offers to print the brief for you to paste.
 
-### `kikstart-next`
+### Next.js repos
 
-| Kind | Name | What it does |
-| --- | --- | --- |
-| Skill | `verify` | Drives a change in a running Next.js dev server with `nextjs:next-dev-loop`, `agent-browser` and `/_next/mcp`. |
+For Next.js repos, also install Vercel's `nextjs@nextjs` plugin. `wrapup` verifies runtime changes with its `nextjs:next-dev-loop` skill when it is installed:
 
-`kikstart-next` depends on Vercel's `nextjs@nextjs` plugin, which supplies the `nextjs:next-dev-loop` skill `verify` follows. Add its marketplace before installing (`claude plugin marketplace add vercel/next.js`) so the dependency resolves. `verify` also expects `agent-browser` on `PATH`.
+```bash
+claude plugin marketplace add vercel/next.js
+claude plugin install nextjs@nextjs
+```
 
 ## Install in Claude Code
 
-Add the marketplace and install at user scope, so every repo gets the plugins:
+Add the marketplace and install at user scope, so every repo gets the plugin:
 
 ```bash
 claude plugin marketplace add Kikstartai/skills
 claude plugin install kikstart@kikstart --scope user
-claude plugin install kikstart-next@kikstart --scope user
 ```
 
 Or inside a session:
@@ -48,7 +48,7 @@ Or inside a session:
 /plugin install kikstart@kikstart
 ```
 
-Plugin skills are namespaced: `/kikstart:ship`, `/kikstart:wrapup`, `/kikstart-next:verify`. Update with `claude plugin marketplace update kikstart`.
+Plugin skills are namespaced: `/kikstart:ship`, `/kikstart:wrapup`, `/kikstart:build`. Update with `claude plugin marketplace update kikstart`.
 
 ## Install with the skills CLI
 
@@ -69,9 +69,6 @@ plugins/
     .claude-plugin/plugin.json
     skills/<name>/SKILL.md
     agents/comment-sicko.md
-  kikstart-next/
-    .claude-plugin/plugin.json
-    skills/<name>/SKILL.md
 skills.sh.json
 ```
 

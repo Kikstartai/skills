@@ -30,7 +30,7 @@ Each of stages 1–3 is: review → act on the findings → verify → report in
 
 **Mandatory and unbudgeted**, after each stage that changed a file: the repo's fast checks — lint, typecheck for every workspace the change can reach, and any guard scripts the build runs — as CLAUDE.md, AGENTS.md or `package.json` name them.
 
-**Live verification**: the five-minute budget applies to a stuck attempt, not to a verification that is merely fiddly. Schema work goes to a throwaway database branch, app-level verification to the repo's test environment or tenant, never live data. A verification still closable in development is closed, not listed; only one that needs my hand goes under **Unverified**, with the path attempted and its specific failure.
+**Live verification**: drive every change to what a route renders or does in the running app. Read the verification doc CLAUDE.md or AGENTS.md names, if any (dev servers, sign-in, test accounts); it wins where it differs. In a Next.js app, invoke the `nextjs:next-dev-loop` skill (from the `nextjs@nextjs` plugin) and follow its loop; if it is not installed, say so and verify by hand. The five-minute budget applies to a stuck attempt, not to a verification that is merely fiddly. Schema work goes to a throwaway database branch, app-level verification to the repo's test environment or tenant, never live data. A verification still closable in development is closed, not listed; only one that needs my hand goes under **Unverified**, with the path attempted and its specific failure.
 
 ## Commit
 

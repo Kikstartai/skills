@@ -1,9 +1,13 @@
 {
   "name": "kikstart",
-  "owner": { "name": "Kikstartai", "url": "https://github.com/Kikstartai" },
-  "description": "Generic agent workflow skills and agents: one main plugin for every repo, plus Next.js web tooling.",
-  "metadata": { "version": "0.1.0" },
-  "allowCrossMarketplaceDependenciesOn": ["nextjs"],
+  "owner": {
+    "name": "Kikstartai",
+    "url": "https://github.com/Kikstartai"
+  },
+  "description": "Generic agent workflow skills and an agent, in one plugin for every repo.",
+  "metadata": {
+    "version": "0.1.0"
+  },
   "plugins": [
     {
       "name": "kikstart",
@@ -11,15 +15,12 @@
       "description": "Workflow skills (ship, spawn, wrapup, build, review-doc, review-feature, gist, greenfield, system-design) and the comment-sicko agent.",
       "version": "0.1.0",
       "category": "productivity",
-      "tags": ["workflow", "review", "worktree", "writing"]
-    },
-    {
-      "name": "kikstart-next",
-      "source": "./plugins/kikstart-next",
-      "description": "Runtime verification for Next.js apps with nextjs:next-dev-loop, agent-browser and /_next/mcp.",
-      "version": "0.1.0",
-      "category": "development",
-      "tags": ["nextjs", "verification"]
+      "tags": [
+        "workflow",
+        "review",
+        "worktree",
+        "writing"
+      ]
     }
   ]
 }
