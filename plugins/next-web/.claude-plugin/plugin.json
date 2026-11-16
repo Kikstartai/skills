@@ -1,0 +1,10 @@
+{
+  "name": "next-web",
+  "version": "0.1.0",
+  "description": "Build and runtime-verify skills for Next.js monorepos.",
+  "author": { "name": "Kikstartai", "url": "https://github.com/Kikstartai" },
+  "homepage": "https://github.com/Kikstartai/agent-kit",
+  "repository": "https://github.com/Kikstartai/agent-kit",
+  "license": "MIT",
+  "keywords": ["nextjs", "verification", "build", "agent-browser"]
+}

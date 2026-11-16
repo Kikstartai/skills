@@ -1,0 +1,24 @@
+{
+  "name": "agent-kit",
+  "owner": { "name": "Kikstartai", "url": "https://github.com/Kikstartai" },
+  "description": "Generic agent workflow skills, agents and output styles: one core plugin for every repo, plus Next.js web tooling.",
+  "metadata": { "version": "0.1.0" },
+  "plugins": [
+    {
+      "name": "core",
+      "source": "./plugins/core",
+      "description": "Workflow skills (ship, spawn, wrapup, review-doc, review-feature, gist, greenfield, system-design, show-me, unslop, bro), the comment-sicko agent and the terse output style.",
+      "version": "0.1.0",
+      "category": "productivity",
+      "tags": ["workflow", "review", "worktree", "writing"]
+    },
+    {
+      "name": "next-web",
+      "source": "./plugins/next-web",
+      "description": "Build and verify skills for Next.js monorepos: workspace build triage, and runtime verification with next-dev-loop, agent-browser and /_next/mcp.",
+      "version": "0.1.0",
+      "category": "development",
+      "tags": ["nextjs", "verification", "build"]
+    }
+  ]
+}

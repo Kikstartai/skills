@@ -1,0 +1,229 @@
+<title>{{TITLE}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Sora:wght@600;700&display=swap">
+<style>
+:root {
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --ink: #131a2a;
+  --muted: #586179;
+  --rule: #d9dee8;
+  --accent: #2443c0;
+  --accent-soft: #e5eafb;
+  --ok: #1b7448;
+  --ok-soft: #e1f2e8;
+  --warn: #8f5b00;
+  --warn-soft: #faefd9;
+  --bad: #b2271b;
+  --bad-soft: #fbe5e2;
+  --info: #6a3db5;
+  --info-soft: #eee7fa;
+  --code-bg: #eef1f6;
+  --f-display: "Sora", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e121a; --surface: #151b26; --ink: #e6e9f0; --muted: #98a1b4; --rule: #29303f;
+    --accent: #8aa2ff; --accent-soft: #1c2546; --ok: #63c996; --ok-soft: #11291e;
+    --warn: #e5b45c; --warn-soft: #2b2313; --bad: #f08a7e; --bad-soft: #321a18;
+    --info: #b9a0f2; --info-soft: #241c37; --code-bg: #1b2230; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e121a; --surface: #151b26; --ink: #e6e9f0; --muted: #98a1b4; --rule: #29303f;
+  --accent: #8aa2ff; --accent-soft: #1c2546; --ok: #63c996; --ok-soft: #11291e;
+  --warn: #e5b45c; --warn-soft: #2b2313; --bad: #f08a7e; --bad-soft: #321a18;
+  --info: #b9a0f2; --info-soft: #241c37; --code-bg: #1b2230; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-block: 40px 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 56px;
+}
+section, header { display: grid; gap: 16px; min-width: 0; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-size: clamp(30px, 5vw, 44px); letter-spacing: -0.02em; }
+h2 { font-size: 24px; letter-spacing: -0.01em; display: flex; gap: 12px; align-items: baseline; }
+h3 { font-size: 17px; }
+h2 .qn {
+  font-family: var(--f-mono); font-size: 14px; font-weight: 500; color: var(--accent);
+  background: var(--accent-soft); border-radius: 6px; padding: 1px 8px;
+}
+p, ul, ol { margin: 0; max-width: 68ch; }
+ul, ol { padding-left: 1.25em; display: grid; gap: 6px; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+code, pre { font-family: var(--f-mono); font-size: 0.86em; }
+code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+pre {
+  background: var(--code-bg); margin: 0; padding: 16px 18px; border-radius: 8px;
+  overflow-x: auto; line-height: 1.5; max-width: 100%;
+}
+pre code { background: none; padding: 0; font-size: 1em; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+.lede { font-size: 18px; color: var(--ink); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-size: 13px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--rule);
+  background: var(--surface); color: var(--muted);
+}
+.toc { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; }
+.toc a { text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.verdict {
+  border-left: 3px solid var(--accent); background: var(--surface); padding: 12px 16px;
+  border-radius: 0 8px 8px 0; max-width: 72ch;
+}
+.verdict strong { font-family: var(--f-display); font-weight: 600; }
+.scroll { overflow-x: auto; max-width: 100%; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+tr:last-child td { border-bottom: none; }
+th {
+  font-family: var(--f-mono); font-size: 11.5px; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted); background: var(--code-bg);
+}
+td.num { font-family: var(--f-mono); color: var(--accent); white-space: nowrap; }
+td.tab { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.decisions { min-width: 760px; }
+.decisions td:nth-child(2) { font-weight: 600; white-space: nowrap; }
+.decisions td:nth-child(3) { width: 38%; }
+.decisions td:nth-child(4) { color: var(--muted); }
+.decisions a { color: inherit; text-decoration-color: var(--rule); }
+figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+figcaption { font-size: 14px; color: var(--muted); max-width: 80ch; }
+.diagram-box { overflow-x: auto; max-width: 100%; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 12px; }
+.diagram { display: block; width: 100%; height: auto; }
+.cd { min-width: 760px; }
+.sq { min-width: 900px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 22px; height: 0; border-top: 2px solid var(--muted); display: inline-block; }
+.sw.acc { border-top: 3px solid var(--accent); }
+.sw.dash { border-top-style: dashed; }
+.box { width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid; display: inline-block; }
+.box.ok { border-color: var(--ok); background: var(--ok-soft); }
+.box.warn { border-color: var(--warn); background: var(--warn-soft); }
+.box.bad { border-color: var(--bad); background: var(--bad-soft); }
+.box.info { border-color: var(--info); background: var(--info-soft); }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.two > div { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; }
+.k { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.example { font-variant-numeric: tabular-nums; }
+.pill { font-family: var(--f-mono); font-size: 12px; padding: 1px 7px; border-radius: 5px; white-space: nowrap; }
+.pill.ok { color: var(--ok); background: var(--ok-soft); }
+.pill.warn { color: var(--warn); background: var(--warn-soft); }
+.pill.bad { color: var(--bad); background: var(--bad-soft); }
+.pill.info { color: var(--info); background: var(--info-soft); }
+.states { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 14px; }
+.states .arr { color: var(--muted); }
+hr { border: none; border-top: 1px solid var(--rule); margin: 0; }
+footer { font-size: 13px; color: var(--muted); }
+
+/* SVG */
+.diagram text { font-family: var(--f-body); fill: var(--ink); }
+.diagram .n { fill: var(--surface); stroke: var(--ink); stroke-opacity: 0.55; stroke-width: 1.2; }
+.diagram .band { fill: var(--code-bg); stroke: var(--rule); stroke-width: 1.2; }
+.diagram .tier { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.1em; fill: var(--muted); }
+.diagram .z-ok { fill: var(--ok-soft); stroke: var(--ok); stroke-width: 1.2; }
+.diagram .z-warn { fill: var(--warn-soft); stroke: var(--warn); stroke-width: 1.2; }
+.diagram .z-bad { fill: var(--bad-soft); stroke: var(--bad); stroke-width: 1.2; }
+.diagram .nt { font-family: var(--f-display); font-weight: 600; font-size: 15px; }
+.diagram .ns { font-size: 12.5px; fill: var(--muted); }
+.diagram .wire { fill: none; stroke: var(--muted); stroke-width: 1.6; }
+.diagram .wire.dash { stroke-dasharray: 5 4; }
+.diagram .wire.acc { stroke: var(--accent); stroke-width: 3; }
+.diagram .halo { fill: none; stroke: var(--surface); stroke-width: 9; }
+.diagram .wl { font-size: 12.5px; fill: var(--muted); }
+.diagram .wl.acc { fill: var(--accent); font-weight: 600; }
+.diagram .mk { fill: var(--muted); }
+.diagram .mk-accent { fill: var(--accent); }
+.diagram .mk-open { fill: none; stroke: var(--muted); stroke-width: 1.4; }
+.diagram .sq-life { stroke: var(--muted); stroke-opacity: 0.5; stroke-dasharray: 4 5; }
+.diagram .sq-msg { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.diagram .sq-ret { stroke-dasharray: 6 4; }
+.diagram .sq-acc { stroke: var(--accent); stroke-width: 2.8; }
+.diagram .sq-lbl { font-family: var(--f-mono); font-size: 13px; fill: var(--ink); paint-order: stroke; stroke: var(--surface); stroke-width: 5px; stroke-linejoin: round; }
+.diagram .sq-lbl.acc { fill: var(--accent); font-weight: 500; }
+.diagram .sq-frame { fill: none; stroke: var(--ink); stroke-opacity: 0.45; stroke-width: 1.2; }
+.diagram .sq-tab { fill: var(--code-bg); stroke: var(--ink); stroke-opacity: 0.45; stroke-width: 1.2; }
+.diagram .sq-op { font-family: var(--f-mono); font-size: 13px; font-weight: 500; }
+.diagram .sq-guard { font-family: var(--f-mono); font-size: 13px; fill: var(--muted); }
+.diagram .sq-div { stroke: var(--ink); stroke-opacity: 0.45; stroke-dasharray: 6 4; }
+.cd { min-width: 760px; }
+.sq { min-width: 860px; }
+.diagram .fl-col { fill: var(--code-bg); stroke: var(--rule); }
+.diagram .fl-col-t { font-family: var(--f-display); font-weight: 600; font-size: 17px; }
+.diagram .fl-num { fill: var(--ink); }
+.diagram .fl-num-t { font-family: var(--f-display); font-weight: 700; font-size: 14px; fill: var(--surface); }
+.diagram .fl-step { font-family: var(--f-display); font-weight: 600; font-size: 17px; paint-order: stroke; stroke: var(--surface); stroke-width: 6px; stroke-linejoin: round; }
+.diagram .fl-req { stroke: var(--ink); stroke-width: 2; }
+.diagram .fl-req.dash { stroke: var(--muted); stroke-width: 1.6; stroke-dasharray: 6 4; }
+.diagram .fl-req.acc { stroke: var(--accent); stroke-width: 3.5; }
+.diagram .fl-lbl { font-size: 14px; fill: var(--muted); paint-order: stroke; stroke: var(--code-bg); stroke-width: 5px; stroke-linejoin: round; }
+.diagram .fl-lbl.strong { fill: var(--ink); font-weight: 600; }
+.diagram .fl-lbl.acc { fill: var(--accent); font-weight: 600; }
+.diagram .fl-side { font-size: 13.5px; fill: var(--muted); font-style: italic; }
+.diagram .fl-box { fill: var(--surface); stroke: var(--ink); stroke-opacity: 0.5; stroke-width: 1.2; }
+.diagram .fl-box-t { font-family: var(--f-mono); font-size: 13px; font-weight: 500; fill: var(--accent); }
+.diagram .fl-line { font-size: 14.5px; }
+.diagram .fl-sub { stroke: var(--muted); stroke-width: 1.3; }
+.diagram .fl-s3 { font-size: 14px; }
+.diagram .fl-note { font-size: 14px; fill: var(--muted); }
+.diagram .fl-rule { stroke: var(--rule); stroke-width: 1.2; }
+.fl { min-width: 860px; }
+.diagram .pr-dot { fill: var(--muted); }
+.diagram .pr-sub { font-size: 12.5px; fill: var(--muted); }
+.diagram .pr-lbl { font-size: 14px; fill: var(--ink); paint-order: stroke; stroke: var(--code-bg); stroke-width: 5px; stroke-linejoin: round; }
+.diagram .pr-lbl.muted { fill: var(--muted); }
+.diagram .pr-side { font-size: 13px; fill: var(--muted); }
+.diagram .pr-cond { fill: var(--muted); font-style: italic; }
+.diagram .pr-dash { stroke-dasharray: 5 4; }
+
+@media (max-width: 600px) {
+  .wrap { gap: 44px; padding-block: 24px 56px; }
+  .lede { font-size: 16.5px; }
+  h2 { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+.sw.thin { border-top-width: 1px; }
+.diagram .tone-ok { fill: var(--ok); }
+.diagram .tone-warn { fill: var(--warn); }
+.diagram .tone-bad { fill: var(--bad); }
+.diagram .tone-info { fill: var(--info); }
+.diagram .z-info { fill: var(--info-soft); stroke: var(--info); stroke-width: 1.2; }
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">{{EYEBROW}}</div>
+  <h1>{{TITLE}}</h1>
+  <p class="lede">{{LEDE}}</p>
+</header>
+
+{{SECTIONS}}
+
+{{FOOTER}}
+
+</div>
