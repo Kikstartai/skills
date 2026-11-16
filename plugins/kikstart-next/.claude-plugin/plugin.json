@@ -1,7 +1,7 @@
 {
   "name": "kikstart-next",
   "version": "0.1.0",
-  "description": "Build and runtime-verify skills for Next.js monorepos.",
+  "description": "Runtime verification skill for Next.js apps.",
   "author": {
     "name": "Kikstartai",
     "url": "https://github.com/Kikstartai"
@@ -12,7 +12,6 @@
   "keywords": [
     "nextjs",
     "verification",
-    "build",
     "agent-browser"
   ],
   "dependencies": [

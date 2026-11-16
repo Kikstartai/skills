@@ -3,6 +3,7 @@ name: ship
 description: Hand a major piece of work to an unattended agent session in its own git worktree, running as a self-paced loop until done and committing as it goes. The brief is confirmed with the user before anything is spawned. Use when the user wants work delivered with minimal interaction — "spawn a chip for this", "run this autonomously", "loop until it's done", "ship this in a worktree", "/ship <thing>" — or when a task is large enough to hand off rather than do inline. Also use when splitting work across two or more dependent sessions.
 argument-hint: "<the work, e.g. add the inventory ledger tables and module>"
 allowed-tools: Read, Grep, Glob, Skill, Bash, PowerShell, AskUserQuestion, mcp__ccd_session__start_session
+disable-model-invocation: true
 ---
 
 # Ship
@@ -13,7 +14,9 @@ If `$ARGUMENTS` is empty and the conversation names no work, ask what to ship be
 
 ## Procedure
 
-1. **Find the repo's harness.** Read the repo's CLAUDE.md or AGENTS.md and any agent-session contract it points to (often `docs/AGENT-SESSIONS.md`). Restate that contract's harness sections in full in the prompt, never paraphrased: the spawned session shares no context with you, and neither memory nor gitignored `.claude/` rules, settings and hooks travel into a worktree. If the repo has no such contract, use the **Default harness** below, filled in from CLAUDE.md, AGENTS.md and `package.json`.
+0. **Check you can spawn.** If `mcp__ccd_session__start_session` is not available, say that `ship` needs the Claude desktop app's sessions, offer to print the brief for the user to paste into a fresh worktree session themselves, and stop. Continue only if the user takes that offer, and then print the final prompt in one fenced block in step 5 instead of spawning.
+
+1. **Find the repo's harness.** Read the repo's CLAUDE.md or AGENTS.md. If either points to an agent-session contract, read it and restate its harness sections in full in the prompt, never paraphrased: the spawned session shares no context with you, and neither memory nor gitignored `.claude/` rules, settings and hooks travel into a worktree. Otherwise, state the **Default harness** below in the prompt, filled in with the repo's real commands from CLAUDE.md, AGENTS.md and `package.json`.
 
 2. **Assemble the brief** from the **Brief** table, plus **Allowance**: the model and effort, whether extra usage may be spent (default no), and any time-boxed allowance the user names (a discount or reset ending at a set time) with what happens when it passes. Default when it passes: keep going on normal allowance and say so in the final report.
 
@@ -24,9 +27,6 @@ If `$ARGUMENTS` is empty and the conversation names no work, ask what to ship be
 4. **Confirm.** Print each brief to the chat — its sections, the session title and the branch it will work from. Add a short **Open questions** list only where an answer would change the work, each carrying your recommendation so the user can confirm rather than compose. Then stop. Do not spawn in the same turn as the draft. On a correction, revise and re-print; never spawn a brief the user has not seen in its amended form.
 
 5. **Spawn each** on the user's yes, with `mcp__ccd_session__start_session` — `initiation: "user_asked"`, `context: "fresh"`, `use_worktree: true`, the Allowance's `model` and `effort`, the brief plus the harness plus the child lines from **Usage limits** as `prompt`, one or two plain sentences of goal as `background`. A model or effort above this session's is silently capped; raise them with `mcp__ccd_session_mgmt__set_session_model` and `mcp__ccd_session_mgmt__set_session_effort` right after the start, while the user is still there to approve it. Both apply from the child's next turn, so its first turn only runs setup and starts the loop. The prompt stands alone: no "as we discussed", no reference to this conversation. The title is imperative, under 60 characters, and names the dependency if there is one. The prompt's last task, after the Definition of done is met, is to run the `wrapup` skill, and the session is not done until it has finished.
-
-   Outside the Claude desktop app, where `start_session` is unavailable, print the final prompt in one fenced block for the user to start in a fresh worktree session.
-
 6. **Report** what each session covers, in a few lines — the decisions it carries and the gates it must pass — and that resumes need the app open and the machine awake, then stop. Do not restate the prompt.
 
 ## Brief
@@ -45,7 +45,7 @@ Every section is required; an empty one means the work isn't ready to hand over.
 
 ## Default harness
 
-Use only when the repo has no agent-session contract. Restate each section in the prompt, with the repo's real commands filled in.
+Use when CLAUDE.md and AGENTS.md point to no agent-session contract. Restate each section in the prompt, with the repo's real commands filled in.
 
 - **Loop.** Run as a self-paced loop: invoke the `loop` skill with no interval. End when the Definition of done is met, or when genuinely blocked on something only the user can supply: write the block down, commit, and stop. Minimise questions; the session has authority to make ordinary judgment calls and to commit. Done means nothing closable is left; an item still closable in development is work, not a caveat. The final message carries three headings and nothing else: **Blocked on me** (or "nothing"), **Changed** (one line per commit subject), **Found** (defects or decisions surfaced outside the brief, each with its file).
 - **Worktree setup.** A worktree checks out tracked files only: no `.env` files, no dependencies installed. Run the repo's worktree setup script if it has one; otherwise copy the env files the repo documents and install with the repo's package manager before anything else.
