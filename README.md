@@ -31,9 +31,9 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 | Kind | Name | What it does |
 | --- | --- | --- |
 | Skill | `build` | Runs the monorepo build from the root and triages failures without changing code. |
-| Skill | `verify` | Drives a change in a running Next.js dev server with `next-dev-loop`, `agent-browser` and `/_next/mcp`. |
+| Skill | `verify` | Drives a change in a running Next.js dev server with `nextjs:next-dev-loop`, `agent-browser` and `/_next/mcp`. |
 
-`verify` expects the `next-dev-loop` skill (`npx skills add vercel/next.js --skill next-dev-loop`) and `agent-browser` on `PATH`.
+`kikstart-next` depends on Vercel's `nextjs@nextjs` plugin, which supplies the `nextjs:next-dev-loop` skill `verify` follows. Add its marketplace before installing (`claude plugin marketplace add vercel/next.js`) so the dependency resolves. `verify` also expects `agent-browser` on `PATH`.
 
 ## Install in Claude Code
 

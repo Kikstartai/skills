@@ -3,6 +3,7 @@
   "owner": { "name": "Kikstartai", "url": "https://github.com/Kikstartai" },
   "description": "Generic agent workflow skills, agents and output styles: one main plugin for every repo, plus Next.js web tooling.",
   "metadata": { "version": "0.1.0" },
+  "allowCrossMarketplaceDependenciesOn": ["nextjs"],
   "plugins": [
     {
       "name": "kikstart",
@@ -15,7 +16,7 @@
     {
       "name": "kikstart-next",
       "source": "./plugins/kikstart-next",
-      "description": "Build and verify skills for Next.js monorepos: workspace build triage, and runtime verification with next-dev-loop, agent-browser and /_next/mcp.",
+      "description": "Build and verify skills for Next.js monorepos: workspace build triage, and runtime verification with nextjs:next-dev-loop, agent-browser and /_next/mcp.",
       "version": "0.1.0",
       "category": "development",
       "tags": ["nextjs", "verification", "build"]

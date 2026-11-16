@@ -1,12 +1,12 @@
 ---
 name: verify
-description: Verify changes against a running Next.js dev server with the next-dev-loop skill, agent-browser and the dev server's /_next/mcp endpoint
+description: Verify changes against a running Next.js dev server with the nextjs:next-dev-loop skill, agent-browser and the dev server's /_next/mcp endpoint
 argument-hint: "[what to verify, e.g. web /orders filter chips]"
 allowed-tools: Skill, Read, Grep, Glob, Bash, PowerShell
 disable-model-invocation: true
 ---
 
-Verify your changes against a running dev server, using the `next-dev-loop` skill and `agent-browser` as you go. Do not report a change as working until you have driven it in the browser and read the server's own view of it.
+Verify your changes against a running dev server, using the `nextjs:next-dev-loop` skill and `agent-browser` as you go. Do not report a change as working until you have driven it in the browser and read the server's own view of it.
 
 Target: `$ARGUMENTS`. If empty, verify whatever you just edited — infer the app and route from the touched files, and say which you picked before driving anything.
 
@@ -14,7 +14,7 @@ Read the repo's CLAUDE.md or AGENTS.md first, and the verification doc it points
 
 ## Run it
 
-1. Invoke the `next-dev-loop` skill (from `vercel/next.js`) and follow its preflight and loop. It is the procedure; everything below is what it can't know. If it is not installed, say so and suggest `npx skills add vercel/next.js --skill next-dev-loop`.
+1. Invoke the `nextjs:next-dev-loop` skill (from the `nextjs@nextjs` plugin) and follow its preflight and loop. It is the procedure; everything below is what it can't know. If it is not installed, say so and suggest `claude plugin marketplace add vercel/next.js` then `claude plugin install nextjs@nextjs`.
 2. `agent-browser` should be on `PATH`. If it is not, say so rather than installing it unasked. Run `agent-browser skills get core` once before driving it.
 3. Derive the session id once per checkout with `agent-browser session id --scope worktree --prefix next-dev-loop`, and pass `--session <id> --restore` on every command, including `close`. Spawn the daemon first with no URL and output redirected — `agent-browser --session <id> --restore --headed open > file 2>&1` — because on Windows the spawning command never returns to a shell capturing its output.
 4. Pair it with `/_next/mcp`: `get_compilation_issues`, `get_errors`, `get_routes`, `get_logs`. Replies are SSE; read the JSON off the `data:` line. On a port other than 3000, set `NEXT_MCP_URL=http://localhost:<port>/_next/mcp`.
