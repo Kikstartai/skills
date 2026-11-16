@@ -1,4 +1,4 @@
-# agent-kit
+# skills
 
 Generic agent workflow skills, one agent and one output style, packaged as a Claude Code plugin marketplace. The skills use the standard `SKILL.md` format, so Codex, Cursor, opencode and the other agents the `skills` CLI supports can install them too.
 
@@ -40,7 +40,7 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 Add the marketplace and install at user scope, so every repo gets the plugins:
 
 ```bash
-claude plugin marketplace add Kikstartai/agent-kit
+claude plugin marketplace add Kikstartai/skills
 claude plugin install kikstart@kikstart --scope user
 claude plugin install kikstart-next@kikstart --scope user
 ```
@@ -48,7 +48,7 @@ claude plugin install kikstart-next@kikstart --scope user
 Or inside a session:
 
 ```text
-/plugin marketplace add Kikstartai/agent-kit
+/plugin marketplace add Kikstartai/skills
 /plugin install kikstart@kikstart
 ```
 
@@ -59,10 +59,10 @@ Plugin skills are namespaced: `/kikstart:ship`, `/kikstart:wrapup`, `/kikstart-n
 For Codex, Cursor, opencode and other agents:
 
 ```bash
-npx skills add Kikstartai/agent-kit
+npx skills add Kikstartai/skills
 ```
 
-Pick skills with `--skill`, for example `npx skills add Kikstartai/agent-kit --skill unslop --skill gist`. List them with `npx skills add Kikstartai/agent-kit --list`. The CLI finds the skills through `skills.sh.json`. The `comment-sicko` agent and the `terse` output style are Claude Code only.
+Pick skills with `--skill`, for example `npx skills add Kikstartai/skills --skill unslop --skill gist`. List them with `npx skills add Kikstartai/skills --list`. The CLI finds the skills through `skills.sh.json`. The `comment-sicko` agent and the `terse` output style are Claude Code only.
 
 ## Layout
 

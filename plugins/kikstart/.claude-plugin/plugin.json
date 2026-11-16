@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "Workflow skills, the comment-sicko agent and the terse output style for any repo.",
   "author": { "name": "Kikstartai", "url": "https://github.com/Kikstartai" },
-  "homepage": "https://github.com/Kikstartai/agent-kit",
-  "repository": "https://github.com/Kikstartai/agent-kit",
+  "homepage": "https://github.com/Kikstartai/skills",
+  "repository": "https://github.com/Kikstartai/skills",
   "license": "MIT",
   "keywords": ["workflow", "review", "worktree", "writing", "system-design"]
 }

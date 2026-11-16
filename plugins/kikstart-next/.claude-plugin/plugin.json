@@ -6,8 +6,8 @@
     "name": "Kikstartai",
     "url": "https://github.com/Kikstartai"
   },
-  "homepage": "https://github.com/Kikstartai/agent-kit",
-  "repository": "https://github.com/Kikstartai/agent-kit",
+  "homepage": "https://github.com/Kikstartai/skills",
+  "repository": "https://github.com/Kikstartai/skills",
   "license": "MIT",
   "keywords": [
     "nextjs",
