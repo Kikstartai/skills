@@ -1,3 +1,3 @@
 {
-  "paths": ["plugins/core/skills", "plugins/next-web/skills"]
+  "paths": ["plugins/kikstart/skills", "plugins/kikstart-next/skills"]
 }

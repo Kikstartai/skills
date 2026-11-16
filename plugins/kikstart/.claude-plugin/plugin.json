@@ -1,5 +1,5 @@
 {
-  "name": "core",
+  "name": "kikstart",
   "version": "0.1.0",
   "description": "Workflow skills, the comment-sicko agent and the terse output style for any repo.",
   "author": { "name": "Kikstartai", "url": "https://github.com/Kikstartai" },

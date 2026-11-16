@@ -1,5 +1,5 @@
 {
-  "name": "next-web",
+  "name": "kikstart-next",
   "version": "0.1.0",
   "description": "Build and runtime-verify skills for Next.js monorepos.",
   "author": { "name": "Kikstartai", "url": "https://github.com/Kikstartai" },

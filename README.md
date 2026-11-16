@@ -6,7 +6,7 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 
 ## Plugins
 
-### `core`
+### `kikstart`
 
 | Kind | Name | What it does |
 | --- | --- | --- |
@@ -26,7 +26,7 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 
 `ship`, `wrapup` and `spawn` use Claude Code features (`loop`, `code-review`, `security-review`, `simplify`, session spawning in the desktop app). In other agents they still work as written procedures.
 
-### `next-web`
+### `kikstart-next`
 
 | Kind | Name | What it does |
 | --- | --- | --- |
@@ -41,18 +41,18 @@ Add the marketplace and install at user scope, so every repo gets the plugins:
 
 ```bash
 claude plugin marketplace add Kikstartai/agent-kit
-claude plugin install core@agent-kit --scope user
-claude plugin install next-web@agent-kit --scope user
+claude plugin install kikstart@kikstart --scope user
+claude plugin install kikstart-next@kikstart --scope user
 ```
 
 Or inside a session:
 
 ```text
 /plugin marketplace add Kikstartai/agent-kit
-/plugin install core@agent-kit
+/plugin install kikstart@kikstart
 ```
 
-Plugin skills are namespaced: `/core:ship`, `/core:wrapup`, `/next-web:verify`. Update with `claude plugin marketplace update agent-kit`.
+Plugin skills are namespaced: `/kikstart:ship`, `/kikstart:wrapup`, `/kikstart-next:verify`. Update with `claude plugin marketplace update kikstart`.
 
 ## Install with the skills CLI
 
@@ -69,12 +69,12 @@ Pick skills with `--skill`, for example `npx skills add Kikstartai/agent-kit --s
 ```text
 .claude-plugin/marketplace.json
 plugins/
-  core/
+  kikstart/
     .claude-plugin/plugin.json
     skills/<name>/SKILL.md
     agents/comment-sicko.md
     output-styles/terse.md
-  next-web/
+  kikstart-next/
     .claude-plugin/plugin.json
     skills/<name>/SKILL.md
 skills.sh.json
