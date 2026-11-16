@@ -2,7 +2,7 @@
 
 Generic agent workflow skills and one agent, packaged as a Claude Code plugin marketplace. The skills use the standard `SKILL.md` format, so Codex, Cursor, opencode and the other agents the `skills` CLI supports can install them too.
 
-Every skill is repo-neutral. Where a skill needs project facts (build commands, dev servers, test accounts, doc style), it reads the repo's `CLAUDE.md` or `AGENTS.md` and the docs they point to.
+Every skill is repo-neutral. Where a skill needs project facts (build commands, dev servers, test accounts, doc style), it reads the repo's `CLAUDE.md` or `AGENTS.md` and the docs they point to. `review-arch` also reads an optional `docs/ARCH-REVIEW.md` for the repo's conventions, checks, verification notes and ledger location.
 
 ## Plugin
 
@@ -14,6 +14,7 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 | Skill | `spawn` | Writes a self-contained prompt that continues the current session in a fresh one. |
 | Skill | `wrapup` | End-of-session chain over this session's commits: code review, security review, simplify, verify, commit. |
 | Skill | `build` | Runs the monorepo build from the root and triages failures without changing code. Manual only. |
+| Skill | `review-arch` | Reviews a folder's architecture against the repo's own rules, then implements the findings in a self-paced loop, one commit each, keeping a ledger. Manual only. |
 | Skill | `review-doc` | Checks one doc against the code it describes and rewrites it shorter and current, in one commit. |
 | Skill | `review-feature` | Walks a feature's old and new code one step at a time. |
 | Skill | `gist` | Three-part summary: today, what changes, what you'd notice. |
@@ -25,7 +26,7 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 
 ### Next.js repos
 
-For Next.js repos, also install Vercel's `nextjs@nextjs` plugin. `wrapup` verifies runtime changes with its `nextjs:next-dev-loop` skill when it is installed:
+For Next.js repos, also install Vercel's `nextjs@nextjs` plugin. `wrapup` and `review-arch` verify runtime changes with its `nextjs:next-dev-loop` skill when it is installed:
 
 ```bash
 claude plugin marketplace add vercel/next.js
