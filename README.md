@@ -49,7 +49,23 @@ Or inside a session:
 /plugin install kikstart@kikstart
 ```
 
-Plugin skills are namespaced: `/kikstart:ship`, `/kikstart:wrapup`, `/kikstart:build`. Update with `claude plugin marketplace update kikstart`.
+Plugin skills are namespaced: `/kikstart:ship`, `/kikstart:wrapup`, `/kikstart:build`.
+
+## Updating
+
+Releasing a change:
+
+1. Bump `version` in `plugins/kikstart/.claude-plugin/plugin.json` and the matching `version` in `.claude-plugin/marketplace.json`. Installs are pinned to the version, so a push without a bump reaches nobody.
+2. Run `claude plugin validate . --strict`, commit and push to `main`.
+
+Picking it up, then restart Claude Code:
+
+```bash
+claude plugin marketplace update kikstart
+claude plugin update kikstart@kikstart
+```
+
+Inside a session, `/plugin` opens the same marketplace and update options.
 
 ## Install with the skills CLI
 
