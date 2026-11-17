@@ -2,7 +2,6 @@
 name: wrapup
 description: Autonomous end-of-session review chain — code review, security review, simplify, verify, commit
 argument-hint: "[optional rev range, e.g. HEAD~4..HEAD]"
-disable-model-invocation: true
 ---
 
 Run the end-of-session review chain over this session's commits, unattended, strictly in this order. Do not reorder, do not run them in parallel, and do not skip a step because the previous one was clean.

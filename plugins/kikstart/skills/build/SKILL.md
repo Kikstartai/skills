@@ -3,7 +3,6 @@ name: build
 description: Build every app and package in a JS/TS monorepo (turbo, nx or a plain workspace build) and triage any failures without changing code
 argument-hint: "[workspace filter, e.g. web]"
 allowed-tools: Bash, PowerShell, Read, Grep, Glob
-disable-model-invocation: true
 ---
 
 Run a full workspace build and confirm every app and package compiles.
