@@ -3,7 +3,6 @@ name: review-doc
 description: Review one doc against the source it describes, then rewrite it shorter and current, in one commit
 argument-hint: "<doc path, e.g. docs/ORDERS.md>"
 allowed-tools: Read, Write, Edit, Grep, Glob, Skill, Bash, PowerShell
-disable-model-invocation: true
 ---
 
 Review `$ARGUMENTS`, decide what changes, and rewrite it. You run this to completion on your own — I am not in the loop.

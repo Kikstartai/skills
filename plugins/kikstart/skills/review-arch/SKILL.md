@@ -3,7 +3,6 @@ name: review-arch
 description: Review a folder's architecture, then autonomously implement the findings in a loop, committing per item
 argument-hint: "<folder path, e.g. packages/web/src/core/orders>"
 allowed-tools: Read, Write, Edit, Grep, Glob, Skill, Bash, PowerShell, TaskCreate, TaskUpdate, TaskList, ScheduleWakeup
-disable-model-invocation: true
 ---
 
 Review the architecture of `$ARGUMENTS`, decide what to change, and implement it. You run this to completion on your own — I am not in the loop between items.
