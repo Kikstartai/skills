@@ -3,7 +3,6 @@ name: spawn
 description: Emit a self-contained prompt that continues this session in a fresh one — phase overview first, stand down until I say go, then run as a self-paced loop
 argument-hint: "<optional focus, e.g. field phase 4a; defaults to what this session was doing>"
 allowed-tools: Read, Grep, Glob, Bash, PowerShell
-disable-model-invocation: true
 ---
 
 This session's context is large. Write the prompt that continues `$ARGUMENTS` in a new session. **Emit the prompt. Start nothing, spawn nothing, change nothing.**

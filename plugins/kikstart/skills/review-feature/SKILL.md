@@ -2,7 +2,6 @@
 name: review-feature
 description: Step-by-step review of a feature — old vs new code, one step at a time, linked
 argument-hint: "[feature]"
-disable-model-invocation: true
 ---
 
 Review and explain the feature: $ARGUMENTS

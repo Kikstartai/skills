@@ -2,7 +2,6 @@
 name: gist
 description: The point of it, in three short parts — what's wrong today, what changes, what I'd notice
 argument-hint: "<optional subject — defaults to what we're discussing>"
-disable-model-invocation: true
 ---
 
 Give me the gist of `$ARGUMENTS`.

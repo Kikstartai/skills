@@ -3,7 +3,6 @@ name: ship
 description: Hand a major piece of work to an unattended agent session in its own git worktree, running as a self-paced loop until done and committing as it goes. The brief is confirmed with the user before anything is spawned. Use when the user wants work delivered with minimal interaction — "spawn a chip for this", "run this autonomously", "loop until it's done", "ship this in a worktree", "/ship <thing>" — or when a task is large enough to hand off rather than do inline. Also use when splitting work across two or more dependent sessions.
 argument-hint: "<the work, e.g. add the inventory ledger tables and module>"
 allowed-tools: Read, Grep, Glob, Skill, Bash, PowerShell, AskUserQuestion, mcp__ccd_session__start_session
-disable-model-invocation: true
 ---
 
 # Ship

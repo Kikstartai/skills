@@ -2,7 +2,6 @@
 name: greenfield
 description: Recommend the design as if the project were greenfield — churn is not a constraint
 argument-hint: "<what to redesign, e.g. the storefront module, the settings layer, this file>"
-disable-model-invocation: true
 ---
 
 Recommend how `$ARGUMENTS` should be designed if this project were greenfield.
