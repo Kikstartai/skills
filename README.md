@@ -14,6 +14,7 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 | Skill | `spawn` | Writes a self-contained prompt that continues the current session in a fresh one. |
 | Skill | `deliver` | Takes a brief (goal, requirements, tests) to committed work with no questions: implement, `wrapup`, every test suite, `/verify` in the running app, build, commit; reports the evidence per requirement. |
 | Skill | `wrapup` | Review chain over this session's commits: code review, security review, simplify, with the fast checks after each, then commit. No browser or slow suites. |
+| Skill | `property-tests` | Reads a source file and writes the fast-check property tests it deserves, then acts on every counterexample. |
 | Skill | `build` | Runs the monorepo build from the root and triages failures without changing code. Manual only. |
 | Skill | `review-arch` | Reviews a folder's architecture against the repo's own rules, then implements the findings in a self-paced loop, one commit each, keeping a ledger. Manual only. |
 | Skill | `review-doc` | Checks one doc against the code it describes and rewrites it shorter and current, in one commit. |
