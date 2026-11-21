@@ -37,6 +37,8 @@ A stage skill's instruction about the final reply (such as "reply with only the 
 
 Commit the fixes as new commits on the current branch; never amend or rebase a commit already in the range. Single-line subjects. Atomic `git commit -m "…" -- <explicit file paths>`, listing only files you changed in this chain, so a concurrent session's uncommitted work is never swept in; never `git commit -- <directory>`, and watch untracked files and `git mv` traps. Split into separate commits where the fixes span unrelated concerns. Format only the files you touched; never a repo-wide format. Never `--no-verify`. Never push.
 
+Make every fix on the session's own branch or worktree, never in a checkout another session is using. If a file you need holds someone else's uncommitted work, fix it in your isolated worktree and merge once theirs lands; never defer it as a follow-up. Every finding ends fixed, dropped with a one-line reason, or listed under **Blocked on me**.
+
 ## Report
 
 The conclusion, not the search: per stage, what changed and its commit subject, then **Blocked on me** (or "nothing").
