@@ -6,14 +6,14 @@
   },
   "description": "Generic agent workflow skills and an agent, in one plugin for every repo.",
   "metadata": {
-    "version": "0.1.4"
+    "version": "0.1.5"
   },
   "plugins": [
     {
       "name": "kikstart",
       "source": "./plugins/kikstart",
       "description": "Workflow skills (ship, spawn, deliver, wrapup, build, review-arch, review-doc, review-feature, gist, greenfield, system-design) and the comment-sicko agent.",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "category": "productivity",
       "tags": [
         "workflow",

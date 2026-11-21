@@ -1,6 +1,6 @@
 {
   "name": "kikstart",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Workflow skills (ship, deliver, wrapup, architecture and doc reviews, design) and the comment-sicko agent for any repo.",
   "author": { "name": "Kikstartai", "url": "https://github.com/Kikstartai" },
   "homepage": "https://github.com/Kikstartai/skills",
