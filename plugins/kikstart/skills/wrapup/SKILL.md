@@ -27,6 +27,8 @@ Run as a self-paced loop: invoke the `loop` skill with **no interval**, so the c
 
 Each of stages 1–3 is: review → act on the findings → fast checks → report in a few lines → next stage. Act on every finding that is a real defect or a real simplification; drop the rest with a one-line reason rather than asking. Escalate to me only a finding whose fix is a design decision I have not already settled — and while waiting, finish everything that does not depend on the answer.
 
+A stage skill's instruction about the final reply (such as "reply with only the report") governs that stage's report, not the turn: print the report, then go straight on to the next stage. The chain ends only after stage 4.
+
 ## Fast checks
 
 **Mandatory and unbudgeted**, after each stage that changed a file: lint, typecheck for every workspace the change can reach, and the unit tests, as the repo's CLAUDE.md or AGENTS.md names them (falling back to `package.json`).
