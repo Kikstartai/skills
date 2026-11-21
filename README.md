@@ -10,9 +10,10 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 
 | Kind | Name | What it does |
 | --- | --- | --- |
-| Skill | `ship` | Drafts a brief for an unattended worktree session, confirms it with you, then spawns it as a self-paced loop. Manual only. |
+| Skill | `ship` | Drafts a brief for an unattended worktree session, confirms it with you, then spawns it; the session ends by running `deliver`. Manual only. |
 | Skill | `spawn` | Writes a self-contained prompt that continues the current session in a fresh one. |
-| Skill | `wrapup` | End-of-session chain over this session's commits: code review, security review, simplify, verify, commit. |
+| Skill | `deliver` | Takes a brief (goal, requirements, tests) to committed work with no questions: implement, `wrapup`, every test suite, `/verify` in the running app, build, commit; reports the evidence per requirement. |
+| Skill | `wrapup` | Review chain over this session's commits: code review, security review, simplify, with the fast checks after each, then commit. No browser or slow suites. |
 | Skill | `build` | Runs the monorepo build from the root and triages failures without changing code. Manual only. |
 | Skill | `review-arch` | Reviews a folder's architecture against the repo's own rules, then implements the findings in a self-paced loop, one commit each, keeping a ledger. Manual only. |
 | Skill | `review-doc` | Checks one doc against the code it describes and rewrites it shorter and current, in one commit. |
@@ -22,11 +23,11 @@ Every skill is repo-neutral. Where a skill needs project facts (build commands, 
 | Skill | `system-design` | Designs a system from a one-line prompt and renders it as one HTML architecture page. |
 | Agent | `comment-sicko` | Flags comments for deletion and the code they excuse. Report only. |
 
-`wrapup` and `spawn` use Claude Code features (`loop`, `code-review`, `security-review`, `simplify`). In other agents they still work as written procedures. `ship` spawns through the Claude desktop app's sessions; without them it stops and offers to print the brief for you to paste.
+`deliver`, `wrapup` and `spawn` use Claude Code features (`loop`, `code-review`, `security-review`, `simplify`, `verify`). In other agents they still work as written procedures. `ship` spawns through the Claude desktop app's sessions; without them it stops and offers to print the brief for you to paste.
 
 ### Next.js repos
 
-For Next.js repos, also install Vercel's `nextjs@nextjs` plugin. `wrapup` and `review-arch` verify runtime changes with its `nextjs:next-dev-loop` skill when it is installed:
+For Next.js repos, also install Vercel's `nextjs@nextjs` plugin. `review-arch` verifies runtime changes with its `nextjs:next-dev-loop` skill when it is installed:
 
 ```bash
 claude plugin marketplace add vercel/next.js
