@@ -19,7 +19,16 @@ Read the repo's CLAUDE.md or AGENTS.md first. Its **Checks** table names the sui
 5. **`build`** — invoke the `build` skill. If it fails, go back to step 1 with its diagnosis.
 6. **Commit** with the repo's commit rules: new commits, single-line subjects, explicit file paths, only files this run changed. Never amend, never `--no-verify`, never push.
 
-A failure in step 3 or step 4 also loops back to step 1, carrying the failure as the next change to make. The run ends when every requirement has evidence or is marked Unverified, and the build is green.
+A failure in step 3 or step 4 also loops back to step 1, carrying the failure as the next change to make. The run ends when every requirement has evidence or is marked Unverified, every finding is closed, and the build is green.
+
+## Findings
+
+Everything the run notices is the run's job, not a note for later. A finding is anything from the reviews, the tests, `/verify`, the build or your own reading. That includes a bug that predates the branch in a file the run touches, and a security issue anywhere you saw it, even one a review skill left out as already there.
+
+- Each finding ends **fixed in this run** (loop back to step 1 with it), **dropped** with a one-line reason, or under **Blocked on me**. There is no fourth outcome.
+- A trade-off you would flag in your own design is unfinished work: build the better design. Report it under Blocked on me only when choosing between designs is genuinely mine to do.
+- When two reviews pull opposite ways (one asks for X, another flags X's cost), find the fix that satisfies both rather than keeping one and reporting the other.
+- A flaky test is the one exception: record it under Test health and do not work around it.
 
 ## Staying alive
 
@@ -32,7 +41,7 @@ A turn can end before the run does: a nested skill's "reply with only the report
 
 ## Report
 
-The final message carries these headings and nothing else:
+The final message carries these headings and nothing else. Never add another, such as Found, Notes or Follow-ups: a finding is fixed, dropped under the heading it concerns, or Blocked on me.
 
 - **Evidence** — each requirement → the test and/or verify step that proves it.
 - **Test health** — the slow suites with their times; flaky tests, each with its file; suites skipped, each with its reason.
