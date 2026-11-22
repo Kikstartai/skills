@@ -21,6 +21,15 @@ Read the repo's CLAUDE.md or AGENTS.md first. Its **Checks** table names the sui
 
 A failure in step 3 or step 4 also loops back to step 1, carrying the failure as the next change to make. The run ends when every requirement has evidence or is marked Unverified, and the build is green.
 
+## Staying alive
+
+A turn can end before the run does: a nested skill's "reply with only the report", a long tool result, an interruption. The loop's wakeup is the safety net, so it is never optional.
+
+- At the start of step 1 and again at the start of every later step, call `ScheduleWakeup` with `delaySeconds` 1200 and the same loop input, as the fallback heartbeat. A turn that ends early then resumes on its own.
+- On any wakeup, find where the run stands from `git log`, the working tree and the transcript, say the step in one line, and carry on from it. Never restart a finished step.
+- `wrapup` runs inside this loop: it does not start a loop of its own.
+- Stop the loop (`ScheduleWakeup` with `stop: true`) only in the same turn as the final report, or when blocked on me.
+
 ## Report
 
 The final message carries these headings and nothing else:

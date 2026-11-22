@@ -16,18 +16,20 @@ Read the repo's CLAUDE.md or AGENTS.md first: it names the fast checks and commi
 
 ## Loop
 
-Run as a self-paced loop: invoke the `loop` skill with **no interval**, so the chain continues without waiting for me. Minimise questions — you have authority to decide which findings to act on, to apply the fixes, and to commit. End the loop when stage 4 has committed and nothing closable is left, or when genuinely blocked on something only I can supply; in that case commit what is finished, state the block in one line, and stop.
+Run as a self-paced loop: invoke the `loop` skill with **no interval**, so the chain continues without waiting for me, and keep a 1200-second `ScheduleWakeup` fallback set at each stage so a turn that ends early resumes. Run from `deliver`, the chain joins deliver's loop and starts none of its own. Minimise questions — you have authority to decide which findings to act on, to apply the fixes, and to commit. End the loop when stage 4 has committed and nothing closable is left, or when genuinely blocked on something only I can supply; in that case commit what is finished, state the block in one line, and stop.
 
 ## Stages
 
-1. **Code review** — bug-hunting first. Invoke the `code-review` skill against the session's commit range (`git diff <range>`) rather than a pull request, and report findings here instead of posting them anywhere.
-2. **Security review** — invoke the `security-review` skill over the same range. It can still change design, so it must land before polish.
+1. **Code review** — bug-hunting first. Run the `code-review` skill in a subagent (below) against the session's commit range (`git diff <range>`) rather than a pull request, and report findings here instead of posting them anywhere.
+2. **Security review** — run the `security-review` skill in a subagent (below) over the same range. It can still change design, so it must land before polish.
 3. **Simplify** — invoke the `simplify` skill last, over the same range. It applies rewrites, so running it earlier would invalidate what the first two reviewed.
 4. **Commit** — commit the fixes the earlier stages produced.
 
 Each of stages 1–3 is: review → act on the findings → fast checks → report in a few lines → next stage. Act on every finding that is a real defect or a real simplification; drop the rest with a one-line reason rather than asking. Escalate to me only a finding whose fix is a design decision I have not already settled — and while waiting, finish everything that does not depend on the answer.
 
-A stage skill's instruction about the final reply (such as "reply with only the report") governs that stage's report, not the turn: print the report, then go straight on to the next stage. The chain ends only after stage 4.
+**Stages 1 and 2 run in a subagent, never through the Skill tool in this session.** Both skills arrive as a fresh instruction that ends "reply with only the report", which ends this session's turn and stops the chain. Spawn one general-purpose subagent per stage with the Agent tool, in the foreground, telling it to invoke that skill over `<range>`, report findings without posting them anywhere, change no file, and return the report as its final message. Its report comes back as a tool result; act on it here. Simplify stays in this session, since it applies rewrites.
+
+Any other stage instruction about the final reply governs that stage's report, not the turn: print the report, then go straight on to the next stage. The chain ends only after stage 4.
 
 ## Fast checks
 
